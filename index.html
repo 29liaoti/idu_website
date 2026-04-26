@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> — A Hiroshima Exhibition</title>
+<title>The Double Edge — A Hiroshima Exhibition</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -15,12 +15,11 @@
     --red: #c0392b;
     --gold: #d4a843;
     --teal: #2a7d6e;
+    --blue: #2a5a8f;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--black);
     color: var(--bone);
@@ -28,7 +27,7 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
+  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -37,38 +36,31 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.2rem 3rem;
-    background: rgba(10,10,10,0.92);
+    background: rgba(10,10,10,0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(212,168,67,0.2);
   }
-
   nav .logo {
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
     letter-spacing: 0.15em;
     color: var(--gold);
     text-transform: uppercase;
+    flex-shrink: 0;
   }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-  }
-
+  nav ul { list-style: none; display: flex; gap: 1.8rem; flex-wrap: wrap; }
   nav ul a {
     color: var(--bone);
     text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    opacity: 0.7;
-    transition: opacity 0.3s;
+    opacity: 0.65;
+    transition: opacity 0.3s, color 0.3s;
   }
-
   nav ul a:hover { opacity: 1; color: var(--gold); }
 
-  /* HERO */
+  /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -81,519 +73,564 @@
     background: radial-gradient(ellipse at 50% 60%, #1a0a00 0%, var(--black) 70%);
     overflow: hidden;
   }
-
   .hero::before {
     content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     opacity: 0.4;
   }
-
   .hero-eyebrow {
-    font-size: 0.8rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.3s forwards;
+    font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
   }
-
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3rem, 8vw, 7rem);
-    line-height: 1.05;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.6s forwards;
+    line-height: 1.05; font-weight: 700; margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 1s ease 0.6s forwards;
   }
-
   .hero h1 span { color: var(--red); font-style: italic; }
-
   .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    font-weight: 300;
-    color: rgba(232,224,208,0.6);
-    max-width: 600px;
-    line-height: 1.7;
+    font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 300;
+    color: rgba(232,224,208,0.6); max-width: 620px; line-height: 1.7;
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+  }
+  .hero-nav-pills {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 1s ease 1.1s forwards;
     margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.9s forwards;
   }
-
+  .pill {
+    padding: 0.5rem 1.2rem; border: 1px solid rgba(212,168,67,0.4);
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none; transition: background 0.3s, border-color 0.3s;
+    border-radius: 2px;
+  }
+  .pill:hover { background: rgba(212,168,67,0.12); border-color: var(--gold); }
   .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.4;
-    animation: fadeUp 1s ease 1.2s forwards, pulse 2s ease 2s infinite;
+    position: absolute; bottom: 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 1s ease 1.3s forwards, pulse 2s ease 2.3s infinite;
   }
-
   .scroll-hint::after {
-    content: '';
-    width: 1px;
-    height: 40px;
-    background: var(--bone);
-    animation: lineGrow 1.5s ease 1.5s infinite;
+    content: ''; width: 1px; height: 40px; background: var(--bone);
+    animation: lineGrow 1.5s ease 2s infinite;
   }
 
-  /* DUAL TECHNOLOGY SECTION */
-  .dual-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-  }
-
-  .dual-panel {
-    padding: 5rem 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dual-panel.save {
-    background: linear-gradient(135deg, #0a1a15 0%, #0d2b22 100%);
-    border-right: 1px solid rgba(42,125,110,0.3);
-  }
-
-  .dual-panel.destroy {
-    background: linear-gradient(135deg, #1a0a0a 0%, #2b0d0d 100%);
-  }
-
-  .panel-tag {
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-  }
-
-  .save .panel-tag { color: var(--teal); }
-  .destroy .panel-tag { color: var(--red); }
-
-  .dual-panel h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .save h2 { color: #7ecfc0; }
-  .destroy h2 { color: #e87070; }
-
-  .dual-panel p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    opacity: 0.75;
-    max-width: 420px;
-  }
-
-  .tech-examples {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .tech-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.8rem 1rem;
-    border-radius: 4px;
-    font-size: 0.95rem;
-  }
-
-  .save .tech-item { background: rgba(42,125,110,0.15); border-left: 2px solid var(--teal); }
-  .destroy .tech-item { background: rgba(192,57,43,0.15); border-left: 2px solid var(--red); }
-
-  .divider-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    background: var(--black);
-    border: 1px solid var(--gold);
-    padding: 1rem 1.5rem;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--gold);
-    white-space: nowrap;
-    text-align: center;
-  }
-
-  /* SECTION SHARED */
+  /* ── SHARED ── */
   section {
     padding: 7rem 2rem;
     max-width: 1100px;
     margin: 0 auto;
   }
-
   .section-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
+    font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
   }
-
   .section-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.2rem, 5vw, 4rem);
-    line-height: 1.1;
-    margin-bottom: 2rem;
+    line-height: 1.1; margin-bottom: 2rem;
   }
-
   .section-body {
-    font-size: 1.15rem;
-    line-height: 1.9;
-    opacity: 0.75;
-    max-width: 700px;
+    font-size: 1.15rem; line-height: 1.9; opacity: 0.75; max-width: 720px;
   }
 
-  /* CHAPTER DIVIDER */
+  /* ── CHAPTER DIVIDER ── */
   .chapter-divider {
-    width: 100%;
-    padding: 2rem 3rem;
+    width: 100%; padding: 2rem 3rem;
     background: var(--ash);
     border-top: 1px solid rgba(212,168,67,0.2);
     border-bottom: 1px solid rgba(212,168,67,0.2);
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    display: flex; align-items: center; gap: 2rem;
   }
-
   .chapter-num {
     font-family: 'Playfair Display', serif;
-    font-size: 5rem;
-    font-weight: 700;
-    color: rgba(212,168,67,0.15);
-    line-height: 1;
+    font-size: 5rem; font-weight: 700;
+    color: rgba(212,168,67,0.15); line-height: 1;
   }
-
   .chapter-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 0.3rem;
+    font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem;
   }
+  .chapter-info p { font-size: 0.9rem; opacity: 0.5; letter-spacing: 0.05em; }
 
-  .chapter-info p {
-    font-size: 0.9rem;
-    opacity: 0.5;
-    letter-spacing: 0.05em;
+  /* ── BEFORE THE BOMB ── */
+  .before-section {
+    background: linear-gradient(to bottom, #0a0d14, #080c12, #0a0a0a);
+    padding: 7rem 0;
   }
-
-  /* TIMELINE */
-  .timeline {
-    position: relative;
-    padding-left: 3rem;
-    margin-top: 3rem;
+  .before-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .before-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; margin-top: 3rem; align-items: start;
   }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--gold), var(--red), transparent);
+  .before-text p {
+    font-size: 1.1rem; line-height: 1.9; opacity: 0.75; margin-bottom: 1.5rem;
   }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 3rem;
-    padding: 1.5rem 2rem;
-    background: var(--ash);
+  .before-facts {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .fact-card {
+    padding: 1.4rem 1.6rem; background: rgba(42,90,143,0.12);
+    border-left: 2px solid var(--blue);
     border-radius: 2px;
   }
+  .fact-card h5 {
+    font-family: 'Playfair Display', serif; font-size: 1rem;
+    color: #6fa8dc; margin-bottom: 0.4rem;
+  }
+  .fact-card p { font-size: 0.95rem; line-height: 1.6; opacity: 0.65; }
 
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative; padding-left: 3rem; margin-top: 3rem;
+  }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--red), transparent);
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem;
+    padding: 1.5rem 2rem; background: var(--ash); border-radius: 2px;
+  }
   .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -3rem;
-    top: 1.8rem;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid var(--black);
+    content: ''; position: absolute;
+    left: -3rem; top: 1.8rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--black);
   }
-
   .timeline-time {
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
+    font-size: 0.75rem; letter-spacing: 0.15em;
+    color: var(--gold); margin-bottom: 0.5rem; text-transform: uppercase;
   }
-
   .timeline-item h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem;
   }
+  .timeline-item p { font-size: 1rem; line-height: 1.7; opacity: 0.65; }
 
-  .timeline-item p {
-    font-size: 1rem;
-    line-height: 1.7;
-    opacity: 0.65;
+  /* ── AFTERMATH ── */
+  .aftermath-section {
+    background: linear-gradient(to bottom, var(--black), #100505, var(--black));
+    padding: 7rem 0;
   }
-
-  /* QUOTE */
-  .quote-block {
-    margin: 4rem auto;
-    max-width: 800px;
-    padding: 3rem 4rem;
-    background: var(--ash);
-    border-left: 3px solid var(--red);
-    position: relative;
+  .aftermath-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .outcome-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
   }
-
-  .quote-block::before {
-    content: '\201C';
-    position: absolute;
-    top: -1rem;
-    left: 2rem;
-    font-family: 'Playfair Display', serif;
-    font-size: 6rem;
-    color: var(--red);
-    opacity: 0.3;
-    line-height: 1;
-  }
-
-  .quote-block blockquote {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.4rem;
-    line-height: 1.7;
-    margin-bottom: 1rem;
-  }
-
-  .quote-block cite {
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    opacity: 0.5;
-    text-transform: uppercase;
-  }
-
-  /* EFFECTS GRID */
-  .effects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .effect-card {
-    padding: 2rem;
-    background: var(--ash);
+  .outcome-card {
+    padding: 2rem; background: var(--ash);
     border-top: 2px solid var(--red);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  .outcome-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .outcome-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+  .outcome-card h4 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    margin-bottom: 0.7rem; color: var(--cream);
+  }
+  .outcome-card p { font-size: 0.95rem; line-height: 1.7; opacity: 0.65; }
 
+  /* ── QUOTE ── */
+  .quote-block {
+    margin: 4rem auto; max-width: 860px;
+    padding: 3rem 4rem; background: var(--ash);
+    border-left: 3px solid var(--red); position: relative;
+  }
+  .quote-block::before {
+    content: '\201C'; position: absolute; top: -1rem; left: 2rem;
+    font-family: 'Playfair Display', serif; font-size: 6rem;
+    color: var(--red); opacity: 0.3; line-height: 1;
+  }
+  .quote-block blockquote {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.4rem; line-height: 1.7; margin-bottom: 1rem;
+  }
+  .quote-block cite {
+    font-size: 0.85rem; letter-spacing: 0.1em; opacity: 0.5; text-transform: uppercase;
+  }
+  .quote-gold { border-left-color: var(--gold) !important; background: #0f0b06 !important; }
+  .quote-gold::before { color: var(--gold) !important; }
+  .quote-teal { border-left-color: var(--teal) !important; background: #060f0d !important; }
+  .quote-teal::before { color: var(--teal) !important; }
+
+  /* ── STATS ── */
+  .stat-row {
+    display: flex; justify-content: center; gap: 4rem;
+    flex-wrap: wrap; margin: 4rem auto;
+    max-width: 900px; padding: 0 2rem;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700;
+    color: var(--red); display: block;
+  }
+  .stat-label {
+    font-size: 0.85rem; letter-spacing: 0.1em;
+    opacity: 0.5; text-transform: uppercase; margin-top: 0.3rem;
+  }
+
+  /* ── HIBAKUSHA DISCRIMINATION ── */
+  .hibakusha-section {
+    background: linear-gradient(to bottom, #0a0a0a, #0a080f, #0a0a0a);
+    padding: 7rem 0;
+  }
+  .hibakusha-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .discrimination-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .discrim-card {
+    padding: 2.2rem; background: rgba(80,40,120,0.1);
+    border-top: 2px solid #8b5cf6;
+    transition: transform 0.3s ease;
+  }
+  .discrim-card:hover { transform: translateY(-4px); }
+  .discrim-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+  .discrim-card h4 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    margin-bottom: 0.7rem; color: #c4b5fd;
+  }
+  .discrim-card p { font-size: 0.95rem; line-height: 1.7; opacity: 0.65; }
+  .hibakusha-timeline {
+    margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .hib-row {
+    display: flex; align-items: flex-start; gap: 1.5rem;
+    padding: 1.2rem 1.5rem; background: var(--ash); border-radius: 2px;
+  }
+  .hib-year {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    font-weight: 700; color: #8b5cf6; min-width: 60px; flex-shrink: 0;
+  }
+  .hib-desc { font-size: 0.97rem; line-height: 1.6; opacity: 0.7; }
+
+  /* ── SCIENCE ── */
+  .science-section {
+    background: linear-gradient(to bottom, #0a0a0a, #060a0a, #0a0a0a);
+    padding: 7rem 0;
+  }
+  .science-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .science-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; margin-top: 3rem; align-items: start;
+  }
+  .science-text p {
+    font-size: 1.1rem; line-height: 1.9; opacity: 0.75; margin-bottom: 1.5rem;
+  }
+  .science-steps {
+    display: flex; flex-direction: column; gap: 1rem;
+    counter-reset: step;
+  }
+  .science-step {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.3rem 1.5rem; background: rgba(42,125,110,0.08);
+    border-left: 2px solid var(--teal); border-radius: 2px;
+    counter-increment: step;
+  }
+  .step-num {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem;
+    font-weight: 700; color: rgba(42,125,110,0.6); min-width: 30px; flex-shrink: 0;
+  }
+  .step-content h5 {
+    font-family: 'Playfair Display', serif; font-size: 1rem;
+    color: #7ecfc0; margin-bottom: 0.3rem;
+  }
+  .step-content p { font-size: 0.93rem; line-height: 1.6; opacity: 0.65; }
+  .bomb-diagram {
+    background: var(--ash); border: 1px solid rgba(42,125,110,0.3);
+    padding: 2rem; border-radius: 4px; margin-top: 1rem;
+  }
+  .bomb-diagram h5 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    color: #7ecfc0; margin-bottom: 1rem; letter-spacing: 0.05em;
+  }
+  .diagram-svg { width: 100%; max-width: 400px; display: block; margin: 0 auto; }
+
+  /* ── TECH (POSITIVE) ── */
+  .tech-section { padding: 7rem 0; }
+  .tech-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .dual-section {
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh;
+    margin-top: 3rem;
+  }
+  .dual-panel {
+    padding: 5rem 4rem; display: flex; flex-direction: column;
+    justify-content: center; position: relative; overflow: hidden;
+  }
+  .dual-panel.save {
+    background: linear-gradient(135deg, #0a1a15 0%, #0d2b22 100%);
+    border-right: 1px solid rgba(42,125,110,0.3);
+  }
+  .dual-panel.destroy {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2b0d0d 100%);
+  }
+  .panel-tag {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    margin-bottom: 1.5rem; font-weight: 600;
+  }
+  .save .panel-tag { color: var(--teal); }
+  .destroy .panel-tag { color: var(--red); }
+  .dual-panel h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .save h2 { color: #7ecfc0; }
+  .destroy h2 { color: #e87070; }
+  .dual-panel p {
+    font-size: 1.1rem; line-height: 1.8; opacity: 0.75; max-width: 420px;
+  }
+  .tech-examples { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+  .tech-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.8rem 1rem; border-radius: 4px; font-size: 0.95rem;
+  }
+  .save .tech-item { background: rgba(42,125,110,0.15); border-left: 2px solid var(--teal); }
+  .destroy .tech-item { background: rgba(192,57,43,0.15); border-left: 2px solid var(--red); }
+  .divider-box {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); z-index: 10;
+    background: var(--black); border: 1px solid var(--gold);
+    padding: 1rem 1.5rem;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--gold); white-space: nowrap; text-align: center;
+  }
+
+  /* ── POSITIVE ADVANCES DEEP DIVE ── */
+  .advances-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .advance-card {
+    padding: 2rem; background: var(--ash);
+    border-top: 2px solid var(--teal);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .advance-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .advance-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+  .advance-card h4 {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem;
+    margin-bottom: 0.8rem; color: #7ecfc0;
+  }
+  .advance-card p { font-size: 0.95rem; line-height: 1.7; opacity: 0.65; }
+
+  /* ── EFFECTS GRID ── */
+  .effects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .effect-card {
+    padding: 2rem; background: var(--ash); border-top: 2px solid var(--red);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
   .effect-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   }
-
-  .effect-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
+  .effect-card .effect-icon { font-size: 2rem; margin-bottom: 1rem; }
   .effect-card h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.8rem;
-    color: var(--cream);
+    font-family: 'Playfair Display', serif; font-size: 1.2rem;
+    margin-bottom: 0.8rem; color: var(--cream);
   }
+  .effect-card p { font-size: 0.95rem; line-height: 1.7; opacity: 0.65; }
 
-  .effect-card p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    opacity: 0.65;
-  }
-
-  /* LEGACY / SCARS */
+  /* ── LASTING SCARS ── */
   .scars-section {
     background: linear-gradient(to bottom, var(--black), #0f0505, var(--black));
     padding: 7rem 0;
   }
 
-  .stat-row {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-    margin: 4rem auto;
-    max-width: 900px;
-    padding: 0 2rem;
-  }
-
-  .stat {
-    text-align: center;
-  }
-
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    color: var(--red);
-    display: block;
-  }
-
-  .stat-label {
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    opacity: 0.5;
-    text-transform: uppercase;
-    margin-top: 0.3rem;
-  }
-
-  /* CLOSING */
+  /* ── CLOSING ── */
   .closing {
-    text-align: center;
-    padding: 8rem 2rem;
+    text-align: center; padding: 8rem 2rem;
     background: radial-gradient(ellipse at center, #1a0a00 0%, var(--black) 70%);
   }
-
   .closing h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 4rem);
-    margin-bottom: 2rem;
-    line-height: 1.2;
+    font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 2rem; line-height: 1.2;
   }
-
   .closing p {
-    font-size: 1.15rem;
-    line-height: 1.9;
-    opacity: 0.7;
-    max-width: 650px;
-    margin: 0 auto 3rem;
+    font-size: 1.15rem; line-height: 1.9; opacity: 0.7;
+    max-width: 650px; margin: 0 auto 2rem;
   }
+  .closing-line { width: 80px; height: 1px; background: var(--gold); margin: 0 auto 2rem; }
 
-  .closing-line {
-    width: 80px;
-    height: 1px;
-    background: var(--gold);
-    margin: 0 auto 2rem;
+  /* ── REFERENCES ── */
+  .references-section {
+    background: var(--ash); padding: 5rem 2rem;
+    border-top: 1px solid rgba(212,168,67,0.2);
   }
+  .references-inner { max-width: 1000px; margin: 0 auto; }
+  .references-inner h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.8rem;
+    margin-bottom: 0.5rem; color: var(--gold);
+  }
+  .references-inner > p { font-size: 0.9rem; opacity: 0.5; margin-bottom: 2rem; }
+  .ref-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .ref-card {
+    padding: 1.3rem 1.5rem; background: var(--smoke);
+    border-left: 2px solid rgba(212,168,67,0.4);
+    border-radius: 2px;
+  }
+  .ref-card .ref-tag {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.7; margin-bottom: 0.4rem;
+  }
+  .ref-card h5 {
+    font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.4rem;
+  }
+  .ref-card a {
+    font-size: 0.82rem; color: rgba(232,224,208,0.5);
+    word-break: break-all; text-decoration: none;
+  }
+  .ref-card a:hover { color: var(--gold); }
 
-  /* FOOTER */
+  /* ── FOOTER ── */
   footer {
-    background: var(--ash);
+    background: var(--black);
     border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 2rem 3rem;
-    text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.4;
-    letter-spacing: 0.05em;
+    padding: 2rem 3rem; text-align: center;
+    font-size: 0.8rem; opacity: 0.35; letter-spacing: 0.05em;
   }
 
-  /* ANIMATIONS */
+  /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes pulse {
     0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.8; }
+    50%       { opacity: 0.8; }
   }
-
   @keyframes lineGrow {
-    0% { transform: scaleY(0); transform-origin: top; }
-    50% { transform: scaleY(1); transform-origin: top; }
-    51% { transform-origin: bottom; }
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform-origin: bottom; }
     100% { transform: scaleY(0); transform-origin: bottom; }
   }
-
   .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 0.8rem; }
+    nav ul a { font-size: 0.7rem; }
     .dual-section { grid-template-columns: 1fr; }
     .dual-panel { padding: 4rem 2rem; }
-    .divider-text { display: none; }
-    nav { padding: 1rem 1.5rem; }
-    nav ul { gap: 1.2rem; }
+    .divider-box { display: none; }
+    .before-grid, .science-grid { grid-template-columns: 1fr; }
     .stat-row { gap: 2rem; }
-    .quote-block { padding: 2rem; }
+    .quote-block { padding: 2rem 1.5rem; }
+    section { padding: 5rem 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
 <nav>
   <div class="logo">The Double Edge</div>
   <ul>
-    <li><a href="#technology">Technology</a></li>
+    <li><a href="#before">Before</a></li>
     <li><a href="#bombing">The Bombing</a></li>
-    <li><a href="#effects">Effects</a></li>
-    <li><a href="#scars">Lasting Scars</a></li>
+    <li><a href="#aftermath">Aftermath</a></li>
+    <li><a href="#hibakusha">Hibakusha</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#technology">Technology</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
 <div class="hero">
   <p class="hero-eyebrow">A Digital Exhibition</p>
   <h1>The <span>Double</span><br>Edge</h1>
   <p class="hero-sub">How the same human ingenuity that gave us medicine and science was turned into the most destructive weapon the world had ever seen — and what that means for us today.</p>
+  <div class="hero-nav-pills">
+    <a href="#before" class="pill">I. Before the Bomb</a>
+    <a href="#bombing" class="pill">II. The Bombing</a>
+    <a href="#aftermath" class="pill">III. Aftermath</a>
+    <a href="#hibakusha" class="pill">IV. Discrimination</a>
+    <a href="#science" class="pill">V. The Science</a>
+    <a href="#technology" class="pill">VI. A Positive Future</a>
+  </div>
   <div class="scroll-hint">Scroll to explore</div>
 </div>
 
-<!-- DUAL TECHNOLOGY SECTION -->
-<div id="technology" style="position:relative;">
-  <div class="dual-section">
-    <div class="dual-panel save fade-in">
-      <p class="panel-tag">Technology as a Healer</p>
-      <h2>The Same Science<br>That Saves</h2>
-      <p>Nuclear science, when directed toward humanity, has become one of the most powerful tools in medicine. The same understanding of atomic energy that was weaponized in 1945 today saves millions of lives every year.</p>
-      <div class="tech-examples">
-        <div class="tech-item"> &nbsp; Radiation therapy for cancer treatment</div>
-        <div class="tech-item">&nbsp; Nuclear medicine imaging (PET scans)</div>
-        <div class="tech-item"> &nbsp; Clean nuclear energy powering cities</div>
-        <div class="tech-item"> &nbsp; Radioisotopes used in diagnostics</div>
+<!-- ══════════════════════════════════════════
+     CHAPTER 01 — LIFE BEFORE THE BOMB
+══════════════════════════════════════════ -->
+<div id="before" class="chapter-divider fade-in">
+  <div class="chapter-num">01</div>
+  <div class="chapter-info">
+    <h3>Life Before the Bomb</h3>
+    <p>Hiroshima, Japan — Pre-1945</p>
+  </div>
+</div>
+
+<div class="before-section">
+  <div class="before-inner fade-in">
+    <p class="section-label">Chapter One</p>
+    <h2 class="section-title">A City Once Alive</h2>
+    <div class="before-grid">
+      <div class="before-text">
+        <p>Before August 6, 1945, Hiroshima was one of Japan's most vibrant and historically significant cities — a place of culture, commerce, and community. Founded in 1589, the city had grown into a major regional hub with a population of approximately 350,000 people.</p>
+        <p>Hiroshima was a significant military headquarters for the Japanese Imperial Army, and its geography — spread across six river deltas flowing into the Seto Inland Sea — made it both beautiful and strategically important. Families lived in wooden homes in close-knit neighbourhoods, children attended school, and markets bustled with daily life.</p>
+        <p>By the early 1940s, Japan was deep in the Pacific War. Resources were rationed, young men were conscripted, and the civilian population endured mounting hardships. Yet Hiroshima, unlike other major Japanese cities, had been largely spared from the American firebombing campaigns — a fact that would make it the target of something entirely new.</p>
+        <p>Many residents had no idea a weapon capable of destroying an entire city even existed. On the night of August 5, 1945, Hiroshima went to sleep not knowing it had only hours left.</p>
       </div>
-    </div>
-    <div class="dual-panel destroy fade-in">
-      <p class="panel-tag">Technology as a Weapon</p>
-      <h2>The Same Science<br>That Destroys</h2>
-      <p>On August 6th, 1945, the most advanced technology of the era was dropped on Hiroshima. In a single moment, everything humanity had built was turned against itself — with catastrophic consequences that are still felt today.</p>
-      <div class="tech-examples">
-        <div class="tech-item"> &nbsp; Atomic bomb kills 80,000+ instantly</div>
-        <div class="tech-item"> &nbsp; Firestorms engulf the entire city</div>
-        <div class="tech-item"> &nbsp; Radiation poisoning affects survivors for decades</div>
-        <div class="tech-item"> &nbsp; Genetic effects passed to future generations</div>
+      <div class="before-facts">
+        <div class="fact-card">
+          <h5>📍 The City</h5>
+          <p>Hiroshima was the 7th-largest city in Japan, spread across the Ōta River delta, with thriving markets, schools, temples, and hospitals.</p>
+        </div>
+        <div class="fact-card">
+          <h5>👥 Population</h5>
+          <p>Approximately 350,000 civilians and military personnel called Hiroshima home on the morning of August 6, 1945.</p>
+        </div>
+        <div class="fact-card">
+          <h5>⚔️ Wartime Context</h5>
+          <p>Japan had been at war since 1937. Civilians faced food rationing, factory mobilisation, and widespread anxiety as Allied forces advanced across the Pacific.</p>
+        </div>
+        <div class="fact-card">
+          <h5>🏫 Mobilised Civilians</h5>
+          <p>Schools had been converted for war production. Thousands of students were mobilised as labourers — many were in the open city centre the morning the bomb fell.</p>
+        </div>
+        <div class="fact-card">
+          <h5>🎯 Why Hiroshima?</h5>
+          <p>US planners chose Hiroshima partly because it had not been heavily bombed, ensuring the effect of the atomic bomb could be clearly measured. Its flat terrain and dense urban core made it an ideal target.</p>
+        </div>
       </div>
     </div>
   </div>
-  <div class="divider-text">Two outcomes.<br>One science.</div>
 </div>
 
-<!-- CHAPTER 1: THE BOMBING -->
+<!-- ══════════════════════════════════════════
+     CHAPTER 02 — THE BOMBING
+══════════════════════════════════════════ -->
 <div id="bombing" class="chapter-divider fade-in">
-  <div class="chapter-num">01</div>
+  <div class="chapter-num">02</div>
   <div class="chapter-info">
     <h3>The Moment of the Bombing</h3>
     <p>August 6, 1945 — 8:15 AM — Hiroshima, Japan</p>
@@ -601,46 +638,49 @@
 </div>
 
 <section class="fade-in">
-  <p class="section-label">Chapter One</p>
+  <p class="section-label">Chapter Two</p>
   <h2 class="section-title">8:15 AM.<br>Everything Changed.</h2>
-  <p class="section-body">On the morning of August 6, 1945, the American B-29 bomber Enola Gay dropped "Little Boy" — the world's first atomic bomb used in warfare — over the city of Hiroshima. The bomb detonated approximately 600 meters above the city. Within seconds, the temperature at ground zero reached several thousand degrees.</p>
+  <p class="section-body">On the morning of August 6, 1945, the American B-29 bomber <em>Enola Gay</em> dropped "Little Boy" — the world's first atomic bomb used in warfare — over the city of Hiroshima. The bomb detonated approximately 600 metres above the city. Within seconds, the temperature at ground zero reached several thousand degrees Celsius.</p>
 
   <div class="timeline">
     <div class="timeline-item">
       <p class="timeline-time">8:15 AM — Detonation</p>
       <h4>The Flash</h4>
-      <p>A blinding flash of light brighter than the sun illuminated the sky. People within 1 kilometre had little warning. Many were vaporized instantly, leaving only shadows burned into stone walls.</p>
+      <p>A blinding flash of light, brighter than the sun, illuminated the sky. People within 1 kilometre had no warning. Many were vaporised instantly, leaving only shadows burned into stone walls — permanent silhouettes of human beings caught in the moment.</p>
     </div>
     <div class="timeline-item">
       <p class="timeline-time">8:15 AM — Seconds Later</p>
       <h4>The Shockwave</h4>
-      <p>A massive pressure wave flattened buildings across 13 square kilometres. The shockwave traveled faster than sound — buildings collapsed before anyone could hear the blast coming.</p>
+      <p>A massive pressure wave flattened buildings across 13 square kilometres. The shockwave traveled faster than sound — structures collapsed before anyone could hear the blast coming. Flying debris became deadly projectiles across the entire city.</p>
     </div>
     <div class="timeline-item">
       <p class="timeline-time">8:15 AM — Minutes Later</p>
       <h4>The Firestorm</h4>
-      <p>Fires ignited across the city merged into a single firestorm. The heat was so intense it melted roof tiles and burned everything within a 2km radius to the ground.</p>
+      <p>Hundreds of individual fires ignited by the thermal pulse merged into a single catastrophic firestorm. Temperatures were so extreme that roof tiles melted, and everything within a 2km radius was reduced to ash and rubble.</p>
     </div>
     <div class="timeline-item">
       <p class="timeline-time">Within Hours</p>
       <h4>Black Rain</h4>
-      <p>Radioactive debris rose into the atmosphere and fell back as "black rain" — oily, dark droplets that contaminated water sources and skin of survivors far from the epicentre.</p>
+      <p>Radioactive particles and soot rose into the atmosphere and fell back to earth as "black rain" — dark, oily droplets that contaminated water sources and the skin of survivors far beyond the epicentre.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="timeline-time">Days to Weeks</p>
+      <h4>Radiation Sickness</h4>
+      <p>Survivors who appeared physically unharmed began dying. Vomiting, hair loss, bleeding, and immune system collapse — acute radiation syndrome — claimed thousands who had believed they had survived.</p>
     </div>
   </div>
 </section>
 
-<!-- QUOTE 1 -->
-<div class="quote-block fade-in" style="max-width:900px; margin: 2rem auto; padding: 0 2rem;">
-  <div style="padding: 3rem 4rem; background: #1a1a1a; border-left: 3px solid var(--red); position: relative;">
-    <span style="position:absolute; top:-1rem; left:2rem; font-family:'Playfair Display',serif; font-size:6rem; color:var(--red); opacity:0.3; line-height:1;">"</span>
-    <blockquote style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.4rem; line-height:1.7; margin-bottom:1rem;">"I thought my younger sister and I were the only ones left alive in the world."</blockquote>
-    <cite style="font-size:0.85rem; letter-spacing:0.1em; opacity:0.5; text-transform:uppercase;">— Hibakusha survivor, age 13 at the time of the bombing</cite>
-  </div>
+<div class="quote-block fade-in" style="margin: 2rem auto;">
+  <blockquote>"I thought my younger sister and I were the only ones left alive in the world."</blockquote>
+  <cite>— Hibakusha survivor, age 13 at the time of the bombing</cite>
 </div>
 
-<!-- CHAPTER 2: IMMEDIATE EFFECTS -->
+<!-- ══════════════════════════════════════════
+     CHAPTER 03 — IMMEDIATE EFFECTS
+══════════════════════════════════════════ -->
 <div id="effects" class="chapter-divider fade-in">
-  <div class="chapter-num">02</div>
+  <div class="chapter-num">03</div>
   <div class="chapter-info">
     <h3>The Immediate Effects</h3>
     <p>The human cost in the hours, days, and weeks that followed</p>
@@ -648,7 +688,7 @@
 </div>
 
 <section class="fade-in">
-  <p class="section-label">Chapter Two</p>
+  <p class="section-label">Chapter Three</p>
   <h2 class="section-title">The Human<br>Cost</h2>
   <p class="section-body">The bomb did not discriminate. Civilians, children, hospital workers — all were caught in the blast. The Hibakusha, meaning "explosion-affected people," were left to survive in a city that no longer existed, with injuries medicine had never encountered before.</p>
 
@@ -656,53 +696,88 @@
     <div class="effect-card">
       <div class="effect-icon">🔥</div>
       <h4>Thermal Burns</h4>
-      <p>The intense heat caused severe burns across exposed skin. Survivors close to the blast had their clothes burned away. Many walked with their skin hanging from their arms and hands.</p>
+      <p>Intense heat caused severe burns across exposed skin. Survivors close to the blast had their clothes burned away. Many walked with their skin hanging from their arms and hands, seeking help that could barely be found.</p>
     </div>
     <div class="effect-card">
       <div class="effect-icon">💨</div>
       <h4>Blast Injuries</h4>
-      <p>The shockwave caused internal injuries from the sudden change in pressure. Flying debris became deadly projectiles that penetrated bodies across the city.</p>
+      <p>The shockwave caused massive internal injuries from sudden pressure change. Flying glass, tiles, and debris penetrated bodies across the entire city in fractions of a second.</p>
     </div>
     <div class="effect-card">
       <div class="effect-icon">☢️</div>
       <h4>Acute Radiation Sickness</h4>
-      <p>Survivors who seemed physically unharmed began dying days later from radiation poisoning — vomiting, hair loss, and internal bleeding as their immune systems collapsed.</p>
+      <p>Survivors who seemed unharmed began dying days later from radiation poisoning — vomiting, hair loss, and internal bleeding as their immune systems collapsed entirely.</p>
     </div>
     <div class="effect-card">
       <div class="effect-icon">🏚️</div>
       <h4>The Destroyed City</h4>
-      <p>70% of Hiroshima's buildings were completely destroyed. Hospitals, schools, and infrastructure collapsed, leaving survivors with no medical help and no clean water.</p>
+      <p>70% of Hiroshima's buildings were completely destroyed. Hospitals, schools, and infrastructure collapsed, leaving survivors with no medical care and no clean water.</p>
     </div>
     <div class="effect-card">
       <div class="effect-icon">👧</div>
       <h4>Children Like Sadako</h4>
-      <p>Children who survived the blast developed leukemia and other cancers years later. Sadako Sasaki, who was 2 years old at the time, developed leukemia at age 12. Her story became a symbol of peace.</p>
+      <p>Children who survived the blast developed leukemia years later. Sadako Sasaki, only 2 years old at the time, developed leukemia at 12. While folding 1,000 origami cranes, she became a global symbol of peace and nuclear abolition.</p>
     </div>
     <div class="effect-card">
       <div class="effect-icon">🩺</div>
       <h4>Overwhelmed Medicine</h4>
-      <p>Of Hiroshima's 298 doctors, 270 were killed or injured. The remaining medical staff had no supplies, no guidance, and had never encountered radiation injuries before.</p>
+      <p>Of Hiroshima's 298 doctors, 270 were killed or injured. The remaining medical staff had no supplies and had never encountered radiation injuries before — they were completely unprepared.</p>
     </div>
   </div>
 </section>
 
-<!-- CHAPTER 3: LASTING SCARS -->
-<div id="scars" class="chapter-divider fade-in">
-  <div class="chapter-num">03</div>
+<!-- ══════════════════════════════════════════
+     CHAPTER 04 — AFTERMATH & OUTCOME
+══════════════════════════════════════════ -->
+<div id="aftermath" class="chapter-divider fade-in">
+  <div class="chapter-num">04</div>
   <div class="chapter-info">
-    <h3>The Lasting Scars</h3>
-    <p>The consequences that echoed through generations</p>
+    <h3>The Aftermath & Outcome</h3>
+    <p>What followed — and how the world changed forever</p>
   </div>
 </div>
 
-<div class="scars-section">
-  <section class="fade-in" style="text-align:center; max-width:900px;">
-    <p class="section-label" style="text-align:center;">Chapter Three</p>
-    <h2 class="section-title" style="text-align:center;">A Wound That<br>Never Fully Healed</h2>
-    <p class="section-body" style="margin:0 auto; text-align:center;">The atomic bombing of Hiroshima did not end on August 6th, 1945. Its effects rippled across decades — in the bodies of survivors, in the grief of families, and in the nuclear arms race it triggered between world powers.</p>
-  </section>
+<div class="aftermath-section">
+  <div class="aftermath-inner fade-in">
+    <p class="section-label">Chapter Four</p>
+    <h2 class="section-title">After the Smoke<br>Cleared</h2>
+    <p class="section-body" style="margin-bottom: 1rem;">Three days after Hiroshima, a second atomic bomb was dropped on Nagasaki on August 9, 1945. Japan surrendered on August 15, ending World War II. But the consequences of Hiroshima did not end with the war — they rippled outward into history, politics, science, and human suffering for generations.</p>
 
-  <div class="stat-row fade-in">
+    <div class="outcome-cards">
+      <div class="outcome-card">
+        <div class="icon">🕊️</div>
+        <h4>Japan's Surrender</h4>
+        <p>Emperor Hirohito announced Japan's unconditional surrender on August 15, 1945 — ending WWII in the Pacific. The atomic bombings were a decisive, if deeply controversial, factor in this decision.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">🌐</div>
+        <h4>The Nuclear Arms Race</h4>
+        <p>Hiroshima triggered a Cold War nuclear arms race between the United States and the Soviet Union. By the 1980s, the world had accumulated over 60,000 nuclear warheads — enough to destroy civilisation many times over.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">⚖️</div>
+        <h4>International Law & Treaties</h4>
+        <p>The bombings accelerated the creation of international humanitarian law. The Geneva Conventions were updated in 1949, and landmark treaties like the Non-Proliferation Treaty (1968) and the UN Treaty on the Prohibition of Nuclear Weapons (2021) followed.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">🏛️</div>
+        <h4>Hiroshima Peace City</h4>
+        <p>In 1949, Japan designated Hiroshima an official "Peace Memorial City." The Hiroshima Peace Memorial Museum and the Genbaku Dome — the preserved ruins of the explosion's epicentre — became symbols of the world's commitment to "Never Again."</p>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">📣</div>
+        <h4>Hibakusha Testimony</h4>
+        <p>Survivors — the Hibakusha — dedicated their lives to sharing their testimonies around the world. Their stories formed the moral backbone of the global anti-nuclear movement and continue to be the most powerful argument against nuclear weapons.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">🔬</div>
+        <h4>Medical & Scientific Legacy</h4>
+        <p>Studying the health effects on Hiroshima survivors fundamentally advanced the world's understanding of radiation, cancer, and genetics — research that continues to shape medicine today.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-row fade-in" style="margin-top: 5rem;">
     <div class="stat">
       <span class="stat-num">80,000+</span>
       <span class="stat-label">Killed instantly</span>
@@ -720,37 +795,385 @@
       <span class="stat-label">Nuclear warheads still exist today</span>
     </div>
   </div>
+</div>
 
-  <div class="quote-block fade-in" style="max-width:900px; margin: 2rem auto; padding: 0 2rem;">
-    <div style="padding: 3rem 4rem; background: #1a0a0a; border-left: 3px solid var(--gold); position: relative;">
-      <span style="position:absolute; top:-1rem; left:2rem; font-family:'Playfair Display',serif; font-size:6rem; color:var(--gold); opacity:0.2; line-height:1;">"</span>
-      <blockquote style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.4rem; line-height:1.7; margin-bottom:1rem;">"We Hibakusha carry the weight of the bomb in our bodies every day. We speak so that it never happens again."</blockquote>
-      <cite style="font-size:0.85rem; letter-spacing:0.1em; opacity:0.5; text-transform:uppercase;">— Hibakusha survivor testimony, Hiroshima Peace Memorial Museum</cite>
+<!-- ══════════════════════════════════════════
+     CHAPTER 05 — HIBAKUSHA DISCRIMINATION
+══════════════════════════════════════════ -->
+<div id="hibakusha" class="chapter-divider fade-in">
+  <div class="chapter-num">05</div>
+  <div class="chapter-info">
+    <h3>Segregation of the Hibakusha</h3>
+    <p>The survivors who were made to feel like the guilty ones</p>
+  </div>
+</div>
+
+<div class="hibakusha-section">
+  <div class="hibakusha-inner fade-in">
+    <p class="section-label">Chapter Five</p>
+    <h2 class="section-title">Survivors — Yet<br>Treated as Outcasts</h2>
+    <p class="section-body">Surviving the bomb was only the beginning of the Hibakusha's suffering. In the years and decades that followed, the approximately 650,000 registered atomic bomb survivors faced a second form of violence — social discrimination, stigma, and systematic exclusion from Japanese society, rooted in fear, misunderstanding, and prejudice.</p>
+
+    <div class="discrimination-grid">
+      <div class="discrim-card">
+        <div class="icon">💍</div>
+        <h4>Marriage Discrimination</h4>
+        <p>Hibakusha were widely considered "undesirable" marriage partners. Families feared their children or grandchildren would inherit radiation-related illness. Many survivors were forced to hide their status or faced outright rejection from potential partners and their families.</p>
+      </div>
+      <div class="discrim-card">
+        <div class="icon">💼</div>
+        <h4>Employment Exclusion</h4>
+        <p>Employers discriminated against Hibakusha, fearing they were ill, contagious, or would become a financial burden through sick leave. Many survivors concealed their exposure — even from doctors — to avoid losing their livelihoods.</p>
+      </div>
+      <div class="discrim-card">
+        <div class="icon">🧬</div>
+        <h4>Fear of Contamination</h4>
+        <p>A widespread, scientifically unfounded belief held that radiation could be "caught" like an infection. Hibakusha were shunned in public, avoided on public transit, and excluded from communities — even by those who had also survived the bombing.</p>
+      </div>
+      <div class="discrim-card">
+        <div class="icon">🏥</div>
+        <h4>Medical Neglect</h4>
+        <p>For years after the bomb, Hibakusha struggled to receive proper medical care. The Japanese and US governments were initially slow to provide support. Survivors had to fight for official recognition and medical assistance that acknowledged their unique health needs.</p>
+      </div>
+      <div class="discrim-card">
+        <div class="icon">🤐</div>
+        <h4>Silenced by Shame</h4>
+        <p>Many Hibakusha chose not to identify themselves publicly for decades, fearing the social consequences. Their silence meant that the world was slow to understand the full human cost of the atomic bombing — and that their suffering went unacknowledged for far too long.</p>
+      </div>
+      <div class="discrim-card">
+        <div class="icon">🌏</div>
+        <h4>Korean Hibakusha</h4>
+        <p>An estimated 40,000–70,000 Koreans — brought to Hiroshima as forced labourers — were among the victims. Korean Hibakusha faced double discrimination: stigmatised both as atomic bomb survivors and as a colonial minority in Japan, with little access to reparations or recognition for decades.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; margin-top:3rem; margin-bottom:1rem; color:var(--gold);">A Timeline of Recognition</h3>
+    <div class="hibakusha-timeline">
+      <div class="hib-row">
+        <div class="hib-year">1945</div>
+        <div class="hib-desc">Atomic Bomb Casualty Commission (ABCC) established by the US to study survivors — but it provided no medical treatment, only data collection. Survivors felt used as scientific subjects.</div>
+      </div>
+      <div class="hib-row">
+        <div class="hib-year">1957</div>
+        <div class="hib-desc">Japan passes the Atomic Bomb Survivors Relief Law, providing some medical funding — though eligibility criteria were narrow and many survivors remained excluded.</div>
+      </div>
+      <div class="hib-row">
+        <div class="hib-year">1978</div>
+        <div class="hib-desc">ABCC is reorganised into the Radiation Effects Research Foundation (RERF), a joint US–Japan body providing ongoing health studies of survivors.</div>
+      </div>
+      <div class="hib-row">
+        <div class="hib-year">2009</div>
+        <div class="hib-desc">After decades of legal battles, Korean Hibakusha living abroad gain access to Japanese government medical benefits following a Supreme Court ruling.</div>
+      </div>
+      <div class="hib-row">
+        <div class="hib-year">2016</div>
+        <div class="hib-desc">President Barack Obama becomes the first sitting US president to visit Hiroshima — meeting with Hibakusha survivors in a historic act of acknowledgment, though no formal apology was issued.</div>
+      </div>
+      <div class="hib-row">
+        <div class="hib-year">Today</div>
+        <div class="hib-desc">Fewer than 100,000 registered Hibakusha remain alive. Their average age exceeds 85. Their testimonies are being urgently recorded and preserved before the last living witnesses are gone.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-block quote-gold fade-in" style="margin: 3rem auto; max-width: 860px;">
+    <blockquote>"We Hibakusha carry the weight of the bomb in our bodies every day. We speak so that it never happens again."</blockquote>
+    <cite>— Hibakusha survivor testimony, Hiroshima Peace Memorial Museum</cite>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 06 — THE SCIENCE
+══════════════════════════════════════════ -->
+<div id="science" class="chapter-divider fade-in">
+  <div class="chapter-num">06</div>
+  <div class="chapter-info">
+    <h3>The Science Behind the Bomb</h3>
+    <p>How nuclear fission unleashes the energy held in atoms</p>
+  </div>
+</div>
+
+<div class="science-section">
+  <div class="science-inner fade-in">
+    <p class="section-label">Chapter Six</p>
+    <h2 class="section-title">Splitting<br>the Atom</h2>
+    <div class="science-grid">
+      <div class="science-text">
+        <p>The atomic bomb works through nuclear fission — the splitting of heavy atomic nuclei to release an enormous amount of energy. At its core is Einstein's famous equation, E=mc², which tells us that even a tiny amount of mass can be converted into a staggering amount of energy, because the speed of light squared is an incomprehensibly large number.</p>
+        <p>The bomb dropped on Hiroshima, "Little Boy," used Uranium-235. The bomb dropped on Nagasaki, "Fat Man," used Plutonium-239. Both exploited the same fundamental physics — a chain reaction of splitting atoms — but through different designs.</p>
+        <p>Understanding this science is not just academic. It is precisely because this energy is so powerful that its military application is so devastating — and why the same physics, when used constructively, has the potential to power entire nations cleanly and safely.</p>
+
+        <div class="bomb-diagram">
+          <h5>🔬 How Fission Works — "Little Boy" (U-235)</h5>
+          <svg class="diagram-svg" viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" style="margin-top:0.5rem;">
+            <!-- Background -->
+            <rect width="380" height="260" fill="#111" rx="6"/>
+            <!-- Neutron label -->
+            <text x="20" y="40" fill="#7ecfc0" font-size="10" font-family="serif">Neutron fired at</text>
+            <text x="20" y="52" fill="#7ecfc0" font-size="10" font-family="serif">U-235 nucleus</text>
+            <!-- Neutron -->
+            <circle cx="60" cy="90" r="7" fill="#7ecfc0" opacity="0.9"/>
+            <text x="55" y="93" fill="#111" font-size="7" font-family="sans-serif">n</text>
+            <line x1="67" y1="90" x2="118" y2="90" stroke="#7ecfc0" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <polygon points="118,86 128,90 118,94" fill="#7ecfc0"/>
+            <!-- U-235 nucleus -->
+            <circle cx="148" cy="90" r="22" fill="none" stroke="#d4a843" stroke-width="1.5"/>
+            <circle cx="148" cy="90" r="10" fill="#d4a843" opacity="0.3"/>
+            <text x="140" y="94" fill="#d4a843" font-size="9" font-family="serif">U-235</text>
+            <!-- Arrow to fission -->
+            <line x1="172" y1="90" x2="205" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+            <text x="175" y="82" fill="rgba(255,255,255,0.4)" font-size="8" font-family="serif">splits</text>
+            <!-- Split products -->
+            <circle cx="230" cy="72" r="12" fill="none" stroke="#c0392b" stroke-width="1.5"/>
+            <text x="224" y="76" fill="#c0392b" font-size="7" font-family="serif">Ba-141</text>
+            <circle cx="230" cy="110" r="12" fill="none" stroke="#c0392b" stroke-width="1.5"/>
+            <text x="224" y="114" fill="#c0392b" font-size="7" font-family="serif">Kr-92</text>
+            <!-- Released neutrons -->
+            <circle cx="270" cy="55" r="5" fill="#7ecfc0" opacity="0.8"/>
+            <text x="277" y="58" fill="#7ecfc0" font-size="7" font-family="serif">n</text>
+            <circle cx="270" cy="90" r="5" fill="#7ecfc0" opacity="0.8"/>
+            <text x="277" y="93" fill="#7ecfc0" font-size="7" font-family="serif">n</text>
+            <circle cx="270" cy="125" r="5" fill="#7ecfc0" opacity="0.8"/>
+            <text x="277" y="128" fill="#7ecfc0" font-size="7" font-family="serif">n</text>
+            <!-- Arrows from split -->
+            <line x1="242" y1="68" x2="263" y2="57" stroke="#7ecfc0" stroke-width="1" stroke-dasharray="2,2"/>
+            <line x1="242" y1="90" x2="263" y2="90" stroke="#7ecfc0" stroke-width="1" stroke-dasharray="2,2"/>
+            <line x1="242" y1="113" x2="263" y2="124" stroke="#7ecfc0" stroke-width="1" stroke-dasharray="2,2"/>
+            <!-- Chain reaction label -->
+            <text x="295" y="55" fill="#c0392b" font-size="8" font-family="serif">→ chain</text>
+            <text x="295" y="65" fill="#c0392b" font-size="8" font-family="serif">reaction</text>
+            <!-- Energy label -->
+            <text x="20" y="165" fill="rgba(232,224,208,0.6)" font-size="9" font-family="serif">Energy released (E = mc²):</text>
+            <text x="20" y="180" fill="#d4a843" font-size="10" font-family="serif">~63 terajoules from ~64kg of U-235</text>
+            <!-- Divider -->
+            <line x1="20" y1="195" x2="360" y2="195" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="20" y="210" fill="rgba(232,224,208,0.4)" font-size="8" font-family="serif">Critical mass is reached when enough fissile material</text>
+            <text x="20" y="222" fill="rgba(232,224,208,0.4)" font-size="8" font-family="serif">is assembled for the chain reaction to sustain itself.</text>
+            <text x="20" y="234" fill="rgba(232,224,208,0.4)" font-size="8" font-family="serif">In "Little Boy," a gun-type design fired one U-235 piece</text>
+            <text x="20" y="246" fill="rgba(232,224,208,0.4)" font-size="8" font-family="serif">into another to achieve critical mass in microseconds.</text>
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:1.5rem; color:var(--bone);">The Chain Reaction — Step by Step</h3>
+        <div class="science-steps">
+          <div class="science-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h5>A Free Neutron Strikes a U-235 Nucleus</h5>
+              <p>A single neutron is fired at an unstable Uranium-235 atom. The nucleus absorbs it and becomes violently unstable — Uranium-236 — for a fraction of a second.</p>
+            </div>
+          </div>
+          <div class="science-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h5>Fission — The Nucleus Splits</h5>
+              <p>The nucleus splits into two smaller atoms (Barium and Krypton) releasing a massive amount of energy and, critically, 2–3 additional free neutrons.</p>
+            </div>
+          </div>
+          <div class="science-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h5>Chain Reaction Begins</h5>
+              <p>Each of those neutrons strikes another U-235 atom, releasing more energy and more neutrons. The reaction doubles with every generation — escalating exponentially.</p>
+            </div>
+          </div>
+          <div class="science-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h5>Critical Mass is Reached</h5>
+              <p>When enough fissile material is assembled (the "critical mass"), the chain reaction becomes self-sustaining — and then explosive. In "Little Boy," 64kg of U-235 was used.</p>
+            </div>
+          </div>
+          <div class="science-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h5>E = mc² Becomes Reality</h5>
+              <p>A tiny fraction of the uranium's mass is converted into pure energy. Even a 1% mass conversion of 64kg releases energy equivalent to ~13,000 tonnes of TNT — destroying an entire city.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem; padding:1.5rem; background:rgba(42,125,110,0.08); border:1px solid rgba(42,125,110,0.25); border-radius:4px;">
+          <p style="font-size:0.9rem; line-height:1.7; opacity:0.7;"><strong style="color:#7ecfc0;">Key Insight:</strong> The same fission physics that powers a bomb is used in nuclear reactors — but in a controlled way. In a reactor, control rods absorb excess neutrons, slowing the chain reaction to a steady, manageable pace that generates heat for electricity instead of an explosion.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- CLOSING -->
+<!-- ══════════════════════════════════════════
+     CHAPTER 07 — POSITIVE TECHNOLOGY
+══════════════════════════════════════════ -->
+<div id="technology" class="chapter-divider fade-in">
+  <div class="chapter-num">07</div>
+  <div class="chapter-info">
+    <h3>Nuclear Technology for Good</h3>
+    <p>The same science, directed toward humanity</p>
+  </div>
+</div>
+
+<div class="tech-section">
+  <div class="tech-inner fade-in">
+    <p class="section-label">Chapter Seven</p>
+    <h2 class="section-title">Two Outcomes.<br>One Science.</h2>
+    <p class="section-body">The very physics that destroyed Hiroshima has also saved millions of lives — and may yet be one of our most powerful tools in addressing climate change, cancer, and global energy poverty. The technology is neutral. It is the choices we make with it that define its legacy.</p>
+  </div>
+
+  <div style="position:relative; margin-top:2rem;">
+    <div class="dual-section">
+      <div class="dual-panel save fade-in">
+        <p class="panel-tag">Nuclear Technology as a Healer</p>
+        <h2>The Science<br>That Saves</h2>
+        <p>When directed toward human welfare, nuclear science has become one of the most powerful tools in modern medicine, clean energy, and scientific discovery. Today it saves millions of lives every year.</p>
+        <div class="tech-examples">
+          <div class="tech-item">⚕️ &nbsp; Radiation therapy for cancer treatment</div>
+          <div class="tech-item">🧠 &nbsp; Nuclear imaging: PET & SPECT scans</div>
+          <div class="tech-item">⚡ &nbsp; Clean nuclear energy powering cities</div>
+          <div class="tech-item">🧪 &nbsp; Radioisotopes in diagnostics & research</div>
+          <div class="tech-item">🚀 &nbsp; Nuclear-powered deep space exploration</div>
+        </div>
+      </div>
+      <div class="dual-panel destroy fade-in">
+        <p class="panel-tag">Nuclear Technology as a Weapon</p>
+        <h2>The Science<br>That Destroys</h2>
+        <p>On August 6th, 1945, the most advanced technology of the era was dropped on Hiroshima. In a single moment, everything humanity had built was turned against itself — with consequences still felt today.</p>
+        <div class="tech-examples">
+          <div class="tech-item">💀 &nbsp; Atomic bomb kills 80,000+ instantly</div>
+          <div class="tech-item">🔥 &nbsp; Firestorms engulf the entire city</div>
+          <div class="tech-item">☢️ &nbsp; Radiation poisoning affects survivors for decades</div>
+          <div class="tech-item">🧬 &nbsp; Genetic effects passed to future generations</div>
+          <div class="tech-item">🌏 &nbsp; 12,500+ warheads still threaten humanity</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider-box">Two outcomes.<br>One science.</div>
+  </div>
+</div>
+
+<section class="fade-in" style="padding-top: 4rem;">
+  <p class="section-label">Technological Insights</p>
+  <h2 class="section-title">Nuclear Science<br>in Service of Life</h2>
+  <p class="section-body">Nuclear technology, when governed by ethical frameworks and directed toward peaceful purposes, represents one of the most versatile and promising tools available to humanity. Here are some of its most impactful positive applications today.</p>
+
+  <div class="advances-grid">
+    <div class="advance-card">
+      <div class="icon">🩺</div>
+      <h4>Cancer Treatment</h4>
+      <p>Radiation therapy uses precisely targeted beams of radiation to destroy cancer cells while protecting surrounding tissue. It is a first-line treatment for many cancer types, saving millions of lives annually. Proton beam therapy — a nuclear technique — offers even greater precision.</p>
+    </div>
+    <div class="advance-card">
+      <div class="icon">🧠</div>
+      <h4>Medical Imaging</h4>
+      <p>PET (Positron Emission Tomography) and SPECT scans use radioactive tracers to image metabolic activity inside the body in real time. These techniques detect cancers, neurological disorders, and heart disease earlier and more accurately than conventional methods.</p>
+    </div>
+    <div class="advance-card">
+      <div class="icon">⚡</div>
+      <h4>Clean Nuclear Energy</h4>
+      <p>Nuclear power plants produce electricity with near-zero carbon emissions. A single nuclear plant can power millions of homes. As the world transitions away from fossil fuels, next-generation reactors — including small modular reactors (SMRs) — offer a safer, cleaner path.</p>
+    </div>
+    <div class="advance-card">
+      <div class="icon">🌾</div>
+      <h4>Food Safety & Agriculture</h4>
+      <p>Radiation is used to sterilise food, extending shelf life and killing harmful pathogens without chemicals or preservatives. Nuclear techniques also help breed more resilient, higher-yield crop varieties — reducing hunger in food-insecure regions.</p>
+    </div>
+    <div class="advance-card">
+      <div class="icon">🚀</div>
+      <h4>Space Exploration</h4>
+      <p>Nuclear radioisotope thermoelectric generators (RTGs) have powered spacecraft like Voyager, Cassini, and Curiosity — enabling missions to the outer planets and beyond where solar panels cannot function. Future deep space missions will rely on nuclear propulsion.</p>
+    </div>
+    <div class="advance-card">
+      <div class="icon">💧</div>
+      <h4>Water & Environmental Science</h4>
+      <p>Nuclear techniques are used to trace water sources, detect groundwater contamination, and study environmental pollution. Isotope analysis helps scientists understand climate change, glacial movements, and ocean circulation patterns.</p>
+    </div>
+  </div>
+</section>
+
+<div class="quote-block quote-teal fade-in" style="margin: 2rem auto;">
+  <blockquote>"Science is a powerful instrument. How it is used — whether it is a blessing or a curse to mankind — depends on mankind and not on the instrument."</blockquote>
+  <cite>— Albert Einstein, 1946</cite>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CLOSING
+══════════════════════════════════════════ -->
 <div class="closing fade-in">
   <div class="closing-line"></div>
   <h2>Technology is neither good<br>nor evil — <em style="color:var(--gold);">we are.</em></h2>
-  <p>As long as people continue to create nuclear weapons, humanity remains in danger of destroying itself with the very tools it built to improve the world. The Hibakusha spoke so we would remember. We remember so it never happens again.</p>
-  <p style="font-size:0.9rem; opacity:0.4; letter-spacing:0.1em; text-transform:uppercase;">Nuclear weapons must never be used or built again.</p>
+  <p>Hiroshima teaches us that the greatest scientific discoveries carry the heaviest moral weight. The same atom that powers a hospital scanner once levelled a city. The same physics that could help us defeat cancer and climate change was first used to destroy 140,000 lives.</p>
+  <p>As long as we remember the Hibakusha, we carry the responsibility they gave us: to choose wisely, to govern carefully, and to build a world where such a weapon is never used again.</p>
+  <p style="font-size:0.9rem; opacity:0.4; letter-spacing:0.1em; text-transform:uppercase; margin-top:1rem;">Nuclear weapons must never be used or built again.</p>
+</div>
+
+<!-- ══════════════════════════════════════════
+     REFERENCES
+══════════════════════════════════════════ -->
+<div class="references-section fade-in">
+  <div class="references-inner">
+    <h3>Reference Resources</h3>
+    <p>English-language sources for further reading and research</p>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-tag">📍 Official Museum</div>
+        <h5>Hiroshima Peace Memorial Museum</h5>
+        <a href="https://hpmmuseum.jp/en/" target="_blank">hpmmuseum.jp/en/</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">📚 History & Context</div>
+        <h5>Atomic Heritage Foundation</h5>
+        <a href="https://www.atomicheritage.org/history/bombings-hiroshima-and-nagasaki-1945" target="_blank">atomicheritage.org</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">📖 Encyclopedia</div>
+        <h5>Britannica — Atomic Bombings</h5>
+        <a href="https://www.britannica.com/event/atomic-bombings-of-Hiroshima-and-Nagasaki" target="_blank">britannica.com</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">🗞️ General History</div>
+        <h5>History.com — Hiroshima & Nagasaki</h5>
+        <a href="https://www.history.com/topics/world-war-ii/bombing-of-hiroshima-and-nagasaki" target="_blank">history.com</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">☢️ The Science</div>
+        <h5>Nuclear Threat Initiative — How Nukes Work</h5>
+        <a href="https://www.nti.org/education-center/nuclear-weapons/how-nuclear-weapons-work/" target="_blank">nti.org</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">⚡ Positive Uses</div>
+        <h5>World Nuclear Association</h5>
+        <a href="https://world-nuclear.org/information-library/non-power-nuclear-applications" target="_blank">world-nuclear.org</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">🏥 Nuclear Medicine</div>
+        <h5>IAEA — Nuclear Medicine & Imaging</h5>
+        <a href="https://www.iaea.org/topics/nuclear-medicine" target="_blank">iaea.org/topics/nuclear-medicine</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">👥 Hibakusha Stories</div>
+        <h5>Nagasaki Archive — Survivor Testimonies</h5>
+        <a href="https://www.pcf.city.hiroshima.jp/virtual/VirtualMuseum_e/tour_e/index.html" target="_blank">pcf.city.hiroshima.jp (virtual tour)</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-tag">⚖️ Discrimination</div>
+        <h5>Reischauer Institute — Hibakusha Discrimination</h5>
+        <a href="https://rijs.fas.harvard.edu/" target="_blank">rijs.fas.harvard.edu</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
-  A student exhibition on the atomic bombing of Hiroshima &nbsp;·&nbsp; Based on studies in English & Humanities &nbsp;·&nbsp; In memory of the Hibakusha
+  A student group exhibition on the atomic bombing of Hiroshima &nbsp;·&nbsp; Based on studies in English &amp; Humanities &nbsp;·&nbsp; In memory of the Hibakusha
 </footer>
 
 <script>
-  // Scroll fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
